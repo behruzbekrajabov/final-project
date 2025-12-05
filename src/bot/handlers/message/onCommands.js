@@ -1,5 +1,4 @@
 import { bot } from "../../bot.js";
-
 function onCommands(msg) {
   const chatId = msg.chat.id;
   const firstname = msg.chat.first_name;
@@ -17,7 +16,6 @@ function onCommands(msg) {
   }
 
   return bot.sendMessage(chatId, `Error /start`);
-
 }
 
 export default onCommands;
