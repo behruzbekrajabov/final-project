@@ -5,6 +5,15 @@ function onCommands(msg) {
   const text = msg.text;
 
   if (text == "/start") {
+    const ExistingUser = findOne({chatId: chatId})
+
+
+
+
+
+
+
+    
     return bot.sendMessage(
       chatId,
       `Assalomu aleykum, xush kelibsiz, ${firstname}`

@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
     firstName:{
         type:String,
     },
+    username:{
+        type:Boolean,
+        default:null
+    },
     active:{
         type:Boolean,
         default:true,
@@ -16,7 +20,9 @@ const userSchema = new mongoose.Schema({
         type:Number,
         default:0,
     },
-})
+},
+{timestamps: true}
+)
 const User = new mongoose.model("User", userSchema)
 
-export default {userSchema}
+export default {User}
