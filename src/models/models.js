@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import onCommands from "../bot/handlers/message/onCommands.js"
 const userSchema = new mongoose.Schema({
     TelegramId:{
         type:String,
@@ -25,4 +26,4 @@ const userSchema = new mongoose.Schema({
 )
 const User = new mongoose.model("User", userSchema)
 
-export default {User}
+export default User
