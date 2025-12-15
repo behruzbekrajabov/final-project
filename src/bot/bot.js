@@ -1,7 +1,7 @@
 import TelegramBot from "node-telegram-bot-api";
 import dotenv from "dotenv";
 import onCommands from "./handlers/message/onCommands.js";
-dotenv.config()
+dotenv.config();
 
 const CHANNEL = "@IT_Park91";
 
@@ -14,24 +14,13 @@ bot.on("message", async function (msg) {
   const chatMember = await bot.getChatMember(CHANNEL, chatId);
 
   console.log(chatMember);
-if (text == "/start") {
-  bot.sendMessage(
-      chatId,
-      `Assalomu aleykum, xush kelibsiz, ${firstname}`,
-      {
-      reply_markup: {
-        keyboard: [
-          [{ text: "Boshlash 🔥" }],
-          [{ text: "Menu" }, { text: "Sozlamalar ⚙️" }],
-        ],
-        resize_keyboard: true,
-      },
-    }
-    );
-}
+ 
+  //Boshlash 🔥
+
   if (chatMember.status == "kicked" || chatMember.status == "left") {
     bot.sendMessage(
-      chatId,`Botni ishlatish uchun kanalga obuna boling @IT_Park91`,
+      chatId,
+      `Botni ishlatish uchun kanalga obuna boling @IT_Park91`,
       {
         reply_markup: {
           remove_keyboard: true,
@@ -54,65 +43,58 @@ if (text == "/start") {
     );
   }
 
-})
 
-bot.on("callback_query", async function(query){
-    const chatId = query.message.chat.id
-    // const firstName = query.msg.firstname;
-    const firstName = query.from.first_name;
-    const data = query.data;
-    if (data == "confirm_subs") {
-        const chatMember = await bot.getChatMember(CHANNEL, chatId);
-        console.log(chatMember);
-
-        if (chatMember.status === "kicked" || chatMember.status === "left") {
-            return bot.sendMessage(chatId, `Oldin,  @IT_Park91`,
-            {
-                reply_markup:{
-                    remove_keyboard:true,
-                    inline_keyboard:[
-                        [
-                            {
-                            text:"100x academy",
-                            url:"@IT_Park91"
-                        },
-
-                    ],
-                    [
-                        {
-                            text:"Obunani tasdiqlash",
-                            callback_data:"confirmSubs"
-                        },
-                        ],
-                    ],
-                    
-                },
-            }
-    );
-        }else if(chatMember.status === "member"){
-            bot.sendMessage(chatId, `Obuna uchun rahmat, ${firstName}`,
-                {
-                    reply_markup:{
-                        inline_keyboard:[
-                            [
-                                {
-                                    text:"LDdkjfaslf",
-                                    callback_data:"asd"
-                                }
-                            ]
-                        ]
-                    }
-                }
-            );
-
-        }
-        
-    }
+   if (text.startsWith("/")) {
+    return onCommands(msg)
+  }
 });
 
+bot.on("callback_query", async function (query) {
+  const chatId = query.message.chat.id;
+  // const firstName = query.msg.firstname;
+  const firstName = query.from.first_name;
+  const data = query.data;
+  if (data == "confirm_subs") {
+    const chatMember = await bot.getChatMember(CHANNEL, chatId);
+    console.log(chatMember);
 
+    if (chatMember.status === "kicked" || chatMember.status === "left") {
+      return bot.sendMessage(chatId, `Oldin,  @IT_Park91`, {
+        reply_markup: {
+          remove_keyboard: true,
+          inline_keyboard: [
+            [
+              {
+                text: "100x academy",
+                url: "@IT_Park91",
+              },
+            ],
+            [
+              {
+                text: "Obunani tasdiqlash",
+                callback_data: "confirmSubs",
+              },
+            ],
+          ],
+        },
+      });
+    } else if (chatMember.status === "member") {
+      bot.sendMessage(chatId, `Obuna uchun rahmat, ${firstName}`, {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "LDdkjfaslf",
+                callback_data: "asd",
+              },
+            ],
+          ],
+        },
+      });
+    }
+  }
+});
 
 console.log("Dastur ishga tushdi 🎆");
-
 
 // export default {bot}
