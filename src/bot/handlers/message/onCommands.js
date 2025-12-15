@@ -9,6 +9,20 @@ async function onCommands(msg) {
   if (text == "/start") {
     const existingUser = await User.findOne({ chatId: chatId });
 
+    bot.sendMessage(
+      chatId,
+      `Assalomu aleykum, xush kelibsi, ${firstname}`,
+      {
+      reply_markup: {
+        keyboard: [
+          [{ text: "Boshlash 🔥" }],
+          [{ text: "Menu" }, { text: "Sozlamalar ⚙️" }],
+        ],
+        resize_keyboard: true,
+      },
+    }
+    );
+
     if (!existingUser) {
       const newUser = new User({
         chatId: chatId,
@@ -20,20 +34,7 @@ async function onCommands(msg) {
       console.log(existingUser);
     }
 
-    return bot.sendMessage(
-      chatId,
-      `Assalomu aleykum, xush kelibsiz, ${firstname}`,
-      {
-        reply_markup: {
-          keyboard: [
-            [{ text: "📚 Kurslar" }, { text: "✍️ Ro‘yxatdan o‘tish" }],
-            [{ text: "ℹ️ Markaz haqida" }, { text: "💬 Fikr bildirish" }],
-            [{ text: "❓ Yordam" }],
-          ],
-          resize_keyboard: true,
-        },
-      }
-    );
+    return;
   }
 
   if (text == "/help") {

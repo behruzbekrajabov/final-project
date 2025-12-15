@@ -14,10 +14,24 @@ bot.on("message", async function (msg) {
   const chatMember = await bot.getChatMember(CHANNEL, chatId);
 
   console.log(chatMember);
-
+if (text == "/start") {
+  bot.sendMessage(
+      chatId,
+      `Assalomu aleykum, xush kelibsiz, ${firstname}`,
+      {
+      reply_markup: {
+        keyboard: [
+          [{ text: "Boshlash 🔥" }],
+          [{ text: "Menu" }, { text: "Sozlamalar ⚙️" }],
+        ],
+        resize_keyboard: true,
+      },
+    }
+    );
+}
   if (chatMember.status == "kicked" || chatMember.status == "left") {
-    return bot.sendMessage(
-      chatId,`Botni ishlatish uchun kanalga obuna boling @academy_100x_uz`,
+    bot.sendMessage(
+      chatId,`Botni ishlatish uchun kanalga obuna boling @IT_Park91`,
       {
         reply_markup: {
           remove_keyboard: true,
@@ -25,12 +39,12 @@ bot.on("message", async function (msg) {
             [
               {
                 text: "100x Academy",
-                url: "https://t.me/academy_100x_uz",
+                url: "https://t.me/IT_Park91",
               },
             ],
             [
               {
-                text: "Obunani TAsdiqlash",
+                text: "Obunani Tasdiqlash",
                 callback_data: "confirm_subs",
               },
             ],
@@ -40,19 +54,19 @@ bot.on("message", async function (msg) {
     );
   }
 
-    bot.sendMessage(chatId, `Hi, ${firstname}`);
 })
 
-bot.on("callback_query", async function(){
-    const chatId = query.msg.chat.id;
-    const firstName = msg.first_name;
+bot.on("callback_query", async function(query){
+    const chatId = query.message.chat.id
+    // const firstName = query.msg.firstname;
+    const firstName = query.from.first_name;
     const data = query.data;
     if (data == "confirm_subs") {
         const chatMember = await bot.getChatMember(CHANNEL, chatId);
         console.log(chatMember);
 
         if (chatMember.status === "kicked" || chatMember.status === "left") {
-            return bot.sendMessage(chatId, `Oldin,  @academy_100x_uz`,
+            return bot.sendMessage(chatId, `Oldin,  @IT_Park91`,
             {
                 reply_markup:{
                     remove_keyboard:true,
@@ -60,7 +74,7 @@ bot.on("callback_query", async function(){
                         [
                             {
                             text:"100x academy",
-                            url:"https://t.me/academy_100x_uz"
+                            url:"@IT_Park91"
                         },
 
                     ],
@@ -75,6 +89,22 @@ bot.on("callback_query", async function(){
                 },
             }
     );
+        }else if(chatMember.status === "member"){
+            bot.sendMessage(chatId, `Obuna uchun rahmat, ${firstName}`,
+                {
+                    reply_markup:{
+                        inline_keyboard:[
+                            [
+                                {
+                                    text:"LDdkjfaslf",
+                                    callback_data:"asd"
+                                }
+                            ]
+                        ]
+                    }
+                }
+            );
+
         }
         
     }
