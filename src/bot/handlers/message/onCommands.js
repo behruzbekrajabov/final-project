@@ -8,7 +8,7 @@ async function onCommands(msg) {
 
   
   if (text == "/start") {
-    const existingUser = await User.findOne({ TelegramId: chatId });
+    const existingUser = await User.findOne({ chatId: chatId });
 
     bot.sendMessage(chatId, `Assalomu aleykum, xush kelibsi, ${firstname}`, {
       reply_markup: {
@@ -20,7 +20,7 @@ async function onCommands(msg) {
       },
     });
 
-    if (text === "kurslar" || text === "/kurslar") {
+    if (text === "Kurslar") {
       await bot.sendMessage(chatId, "📚 Kurslarimiz:", {
         reply_markup: {
           inline_keyboard: [
@@ -70,7 +70,7 @@ async function onCommands(msg) {
   }
   if (text == "/profile") {
     const existingUser = await User.findOne({
-      TelegramId: chatId,
+      chatId: chatId,
     });
     console.log(existingUser);
 
@@ -79,10 +79,10 @@ async function onCommands(msg) {
       `
       Mening Profilim:/n
       #chatID: ${existingUser.chatId}
-      #Ism: ${existingUser.chatId}
-      #User name: ${existingUser.chatId}
-      #Active: ${existingUser.chatId}
-      #Balance: ${existingUser.chatId}
+      #Ism: ${existingUser.first_name}
+      #User name: ${existingUser.username}
+      #Active: ${existingUser.active}
+      #Balance: ${existingUser.balance}
 
       `
     );

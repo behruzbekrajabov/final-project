@@ -1,8 +1,7 @@
 import "./src/bot/bot.js";
-import dotenv from "dotenv";
+import "dotenv/config";
 import mongoose from "mongoose";
 
-dotenv.config();
 
 async function connectDB() {
   await mongoose
@@ -15,7 +14,7 @@ async function connectDB() {
     });
 }
 
-connectDB()
-
+connectDB();
 
 console.log("Dastur ishga tushmoqda...");
+

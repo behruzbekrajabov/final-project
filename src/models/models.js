@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
-import onCommands from "../bot/handlers/message/onCommands.js"
+
 const userSchema = new mongoose.Schema({
-    TelegramId:{
+    chatId:{
         type:String,
         required:true,
         unique:true,
@@ -10,20 +10,20 @@ const userSchema = new mongoose.Schema({
         type:String,
     },
     username:{
-        type:Boolean,
+        type: String,
         default:null
     },
     active:{
-        type:Boolean,
+        type: Boolean,
         default:true,
     },
     balance:{
         type:Number,
-        default:0,
+        default:4000,
     },
 },
 {timestamps: true}
 )
-const User = new mongoose.model("User", userSchema)
+const User = new mongoose.model("User", userSchema);
 
 export default User

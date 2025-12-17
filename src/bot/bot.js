@@ -42,8 +42,7 @@ bot.on("message", async function (msg) {
       }
     );
   }
-
-
+  
    if (text.startsWith("/")) {
     return onCommands(msg)
   }
