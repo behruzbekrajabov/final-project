@@ -9,7 +9,7 @@
     "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Behruzbek",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^17.2.3",

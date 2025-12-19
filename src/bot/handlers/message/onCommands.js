@@ -20,17 +20,7 @@ async function onCommands(msg) {
       },
     });
 
-    if (text === "Kurslar") {
-      await bot.sendMessage(chatId, "📚 Kurslarimiz:", {
-        reply_markup: {
-          inline_keyboard: [
-            [{ text: "🟨 JavaScript", callback_data: "course_js" }],
-            [{ text: "🟩 Backend (Node.js)", callback_data: "course_backend" }],
-            [{ text: "🤖 Telegram Bot", callback_data: "course_tg" }],
-          ],
-        },
-      });
-    }
+    
 
     if (!existingUser) {
       const newUser = new User({
@@ -45,6 +35,17 @@ async function onCommands(msg) {
 
     return;
   }
+  if (text == "Kurslar") {
+      await bot.sendMessage(chatId, "📚 Kurslarimiz:", {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "🟨 JavaScript", callback_data: "course_js"}],
+            [{ text: "🟩 Backend (Node.js)", callback_data: "course_backend"}],
+            [{ text: "🤖 Telegram Bot", callback_data: "course_tg"}],
+          ],
+        },
+      });
+    }
 
   if (text == "/help") {
     return bot.sendMessage(chatId, `Yordam kerakmi, ${firstname}?`);
@@ -55,6 +56,8 @@ async function onCommands(msg) {
     const allUsers = await User.find();
     bot.sendMessage(
       chatId,
+
+
 
       `Users: ${userNum}`
     );
@@ -89,12 +92,5 @@ async function onCommands(msg) {
     return;
   }
 }
-
-//   if (chatId == 1072558595) {
-//     return;
-//   }else {
-//   return bot.sendMessage(chatId, `Error /start`);
-
-// }
 
 export default onCommands;

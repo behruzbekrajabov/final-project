@@ -8,9 +8,13 @@ const CHANNEL = "@IT_Park91";
 export const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
 
 bot.on("message", async function (msg) {
+
   const chatId = msg.chat.id;
+
   const text = msg.text;
+
   const firstname = msg.chat.first_name;
+
   const chatMember = await bot.getChatMember(CHANNEL, chatId);
 
   console.log(chatMember);
@@ -45,6 +49,8 @@ bot.on("message", async function (msg) {
   
    if (text.startsWith("/")) {
     return onCommands(msg)
+  }else if(text == "Kurslar"){
+    return onCommands(msg);
   }
 });
 
@@ -78,22 +84,13 @@ bot.on("callback_query", async function (query) {
         },
       });
     } else if (chatMember.status === "member") {
-      bot.sendMessage(chatId, `Obuna uchun rahmat, ${firstName}`, {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "LDdkjfaslf",
-                callback_data: "asd",
-              },
-            ],
-          ],
-        },
-      });
+      bot.sendMessage(chatId, `Obuna uchun rahmat, ${firstName}`);
+    }else if(data == "start"){
+      onCommands(msg)
     }
   }
 });
 
 console.log("Dastur ishga tushdi 🎆");
 
-// export default {bot}
+export default {bot}
